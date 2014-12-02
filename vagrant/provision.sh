@@ -2,7 +2,27 @@
 set -eux
 
 # パッケージ集
-yum -y install patch git openssl-devel readline-devel libxml2-devel libxslt-devel sqlite-devel.x86_64 nodejs gcc gcc-c++ openssl readline libxml2.x86_64 libxslt sqlite.x86_64
+packages=(
+    patch
+    git
+    openssl-devel
+    readline-devel
+    libxml2-devel
+    libxslt-devel
+    sqlite-devel.x86_64
+    nodejs
+    gcc
+    gcc-c++
+    openssl
+    readline
+    libxml2.x86_64
+    libxslt sqlite.x86_64
+)
+
+yum -y install "${packages[@]}"
+for p in "${packages[@]}"; do
+    yum -y install $p
+done
 
 # rbenvをcloneする
 CHK_DIR=/home/vagrant/.rbenv
