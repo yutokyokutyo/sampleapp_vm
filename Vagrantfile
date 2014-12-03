@@ -8,6 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell do |shell|
     shell.path = "vagrant/provision.sh"
+    shell.privilaged = false
   end
 
   # DNSの名前解決tips
