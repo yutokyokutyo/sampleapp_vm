@@ -81,7 +81,7 @@ cd /home/vagrant/sample_app/ ; bundle install --without production --path /home/
 
 # iptablesの設定
 if ! sudo grep 'tcp -m tcp --dport 3000 -j ACCEPT' /etc/sysconfig/iptables ; then
-    sudo sed -i -e "s/COMMIT/-I INPUT -p tcp -m tcp --dport 3000 -j ACCEPT/g" /etc/sysconfig/iptables
-    sudo echo 'COMMIT' >> /etc/sysconfig/iptables
+    sudo iptables -I INPUT 4 -p tcp -m tcp --dport 3000 -j ACCEPT
+    sudo sh -c "iptables-save > /etc/sysconfig/iptables"
 fi
 sudo service iptables restart
