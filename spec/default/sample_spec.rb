@@ -29,11 +29,11 @@ end
 describe 'Ruby' do
   describe 'rbenv' do
     describe command('/home/vagrant/.rbenv/bin/rbenv -v') do
-      its(:stdout) { should match /rbenv 0\.4\.\d/}
+      its(:stdout) { should match /rbenv 0\.4\.\d/ }
     end
     describe file('/home/vagrant/.bash_profile') do
-      its(:content) { should match /export PATH="\$HOME\/.rbenv\/bin:\$PATH"/ }
-      its(:content) { should match /eval "\$\(rbenv init -\)"/ }
+      its(:content) { should match %r(export PATH="\$HOME/\.rbenv/bin:\$PATH") }
+      its(:content) { should match %r(eval "\$\(rbenv init -\)") }
     end
   end
 
