@@ -71,11 +71,6 @@ describe 'Rails' do
     its(:content) { should match /rbenv-rehash/ }
   end
 
-  describe command('source ~/.bash_profile; cd ~/sample_app; bundle exec rails -v') do
-    let(:disable_sudo) { true }
-    its(:stdout) { should match /4\.0\.\d/ }
-  end
-
   describe 'only specific port open as countermeasure for firewall' do
     describe iptables do
       it { should have_rule('-A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT') }
