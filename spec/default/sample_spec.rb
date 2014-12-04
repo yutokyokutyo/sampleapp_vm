@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'packages' do
   packages = %w(
+  patch
   git
   nodejs
   gcc
