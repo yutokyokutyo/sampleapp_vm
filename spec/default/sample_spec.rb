@@ -22,7 +22,7 @@ describe 'packages' do
     describe package(p) do
       it { should be_installed }
     end
-  enu -ud
+  end
 end
 
 describe 'Ruby' do
@@ -37,7 +37,7 @@ describe 'Ruby' do
   end
 
   describe file('/home/vagrant/.rbenv/plugins/ruby-build') do
-   it { should be_directory }
+    it { should be_directory }
   end
 
   describe file('/home/vagrant/.rbenv/version') do
