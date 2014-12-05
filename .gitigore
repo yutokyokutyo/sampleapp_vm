@@ -76,3 +76,6 @@ bower.json
 Session.vim
 .netrwhist
 *~
+
+### Vagrant ###
+.vagrant/
