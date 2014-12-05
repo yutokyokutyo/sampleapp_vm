@@ -27,8 +27,11 @@ if [ ! -d ${CHK_DIR_rbenv} ] ; then
     # rbenvの環境設定
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.bash_profile
     echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bash_profile
-    exec $SHELL -l
 fi
+
+set +u
+source /home/vagrant/.bash_profile
+set -u
 
 # ruby-buildをcloneする
 CHK_DIR_ruby_build=/home/vagrant/.rbenv/plugins/ruby-build
