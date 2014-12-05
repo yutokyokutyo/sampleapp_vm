@@ -49,7 +49,7 @@ describe 'Ruby' do
 end
 
 describe 'Rails' do
-  describe file('/home/vagrant/sample_app') do
+  describe file('/home/vagrant/Sample_app_on_VM') do
     it { should be_directory }
     it { should be_mode            755    }
     it { should be_owned_by     'vagrant' }
@@ -60,7 +60,7 @@ describe 'Rails' do
     its(:stdout) { should match /Bundler version 1\.7\.\d/ }
   end
 
-  describe file('/home/vagrant/sample_app/Gemfile') do
+  describe file('/home/vagrant/Sample_app_on_VM/Gemfile') do
     its(:content) { should match /sqlite3/ }
     its(:content) { should match /rails/ }
     its(:content) { should match /libv8/ }
@@ -79,7 +79,7 @@ describe 'Rails' do
     end
   end
 
-  describe file('/home/vagrant/sample_app/db/migrate') do
+  describe file('/home/vagrant/Sample_app_on_VM/db/migrate') do
     it { should be_directory }
   end
 
