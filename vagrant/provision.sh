@@ -62,14 +62,14 @@ if [ ! -f ${CHK_FILE_bundle} ] ; then
 fi
 
 # Sample_appを git clone する
-CHK_DIR_sample_app=/home/vagrant/sample_app
+CHK_DIR_Sample_app=/home/vagrant/Sample_app_on_VM
 
-if [ ! -d ${CHK_DIR_sample_app} ] ; then
+if [ ! -d ${CHK_DIR_Sample_app} ] ; then
     git clone https://github.com/yutokyokutyo/Sample_app_on_VM.git
 fi
 
 # bundler でインストールする
-cd /home/vagrant/sample_app/ ; bundle install --without production --path /home/vagrant/sample_app/vendor/bundle
+cd /home/vagrant/Sample_app_on_VM/ ; bundle install --without production --path /home/vagrant/Sample_app_on_VM/vendor/bundle
 
 # iptablesの設定
 if ! sudo grep 'tcp -m tcp --dport 3000 -j ACCEPT' /etc/sysconfig/iptables ; then
