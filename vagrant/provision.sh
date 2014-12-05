@@ -12,7 +12,7 @@ packages=(
     sqlite-devel.x86_64
     nodejs
     gcc
-    gcc++
+    gcc-c++
     openssl
     readline
     libxml2.x86_64
