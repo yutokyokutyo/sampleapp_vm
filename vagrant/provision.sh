@@ -10,7 +10,6 @@ packages=(
     libxml2-devel
     libxslt-devel
     sqlite-devel.x86_64
-    nodejs
     gcc
     gcc-c++
     openssl
