@@ -4,7 +4,6 @@ describe 'packages' do
   packages = %w(
   patch
   git
-  nodejs
   gcc
   gcc-c++
   openssl
