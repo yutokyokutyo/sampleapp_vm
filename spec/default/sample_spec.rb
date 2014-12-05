@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'packages' do
   packages = %w(
+  patch
   git
-  nodejs
   gcc
   gcc-c++
   openssl
@@ -22,22 +22,22 @@ describe 'packages' do
     describe package(p) do
       it { should be_installed }
     end
-  enu -ud
+  end
 end
 
 describe 'Ruby' do
   describe 'rbenv' do
     describe command('/home/vagrant/.rbenv/bin/rbenv -v') do
-      its(:stdout) { should match /rbenv 0\.4\.\d/}
+      its(:stdout) { should match /rbenv 0\.4\.\d/ }
     end
     describe file('/home/vagrant/.bash_profile') do
-      its(:content) { should match /export PATH="\$HOME\/.rbenv\/bin:\$PATH"/ }
-      its(:content) { should match /eval "\$\(rbenv init -\)"/ }
+      its(:content) { should match %r(export PATH="\$HOME/\.rbenv/bin:\$PATH") }
+      its(:content) { should match %r(eval "\$\(rbenv init -\)") }
     end
   end
 
   describe file('/home/vagrant/.rbenv/plugins/ruby-build') do
-   it { should be_directory }
+    it { should be_directory }
   end
 
   describe file('/home/vagrant/.rbenv/version') do
@@ -49,7 +49,7 @@ describe 'Ruby' do
 end
 
 describe 'Rails' do
-  describe file('/home/vagrant/sample_app') do
+  describe file('/home/vagrant/Sample_app_on_VM') do
     it { should be_directory }
     it { should be_mode            755    }
     it { should be_owned_by     'vagrant' }
@@ -60,7 +60,7 @@ describe 'Rails' do
     its(:stdout) { should match /Bundler version 1\.7\.\d/ }
   end
 
-  describe file('/home/vagrant/sample_app/Gemfile') do
+  describe file('/home/vagrant/Sample_app_on_VM/Gemfile') do
     its(:content) { should match /sqlite3/ }
     its(:content) { should match /rails/ }
     its(:content) { should match /libv8/ }
@@ -68,11 +68,6 @@ describe 'Rails' do
     its(:content) { should match /execjs/ }
     its(:content) { should match /nokogiri/ }
     its(:content) { should match /rbenv-rehash/ }
-  end
-
-  describe command('source ~/.bash_profile; cd ~/sample_app; bundle exec rails -v') do
-    let(:disable_sudo) { true }
-    its(:stdout) { should match /4\.0\.\d/ }
   end
 
   describe 'only specific port open as countermeasure for firewall' do
@@ -84,7 +79,7 @@ describe 'Rails' do
     end
   end
 
-  describe file('/home/vagrant/sample_app/db/migrate') do
+  describe file('/home/vagrant/Sample_app_on_VM/db/migrate') do
     it { should be_directory }
   end
 
