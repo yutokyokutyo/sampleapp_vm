@@ -11,6 +11,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   shell.privileged = false
   # end
 
+config.vm.provision :shell do |update_puppet|
+    update_puppet.inline = <<-'SCRIPT'
+      require_version='3.7.3'
+      puppet_version=$(rpm -q --queryformat '%{VERSION}' puppet)
+      [ "$puppet_version" = "$require_version" ] || {
+          rpm --import http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs
+          rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-5.noarch.rpm
+          yum install -y "puppet-${require_version}"
+      }
+    SCRIPT
+  end
+
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "vagrant"
     puppet.manifest_file  = "init.pp"
