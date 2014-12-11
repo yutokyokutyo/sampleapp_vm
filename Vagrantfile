@@ -11,6 +11,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   shell.privileged = false
   # end
 
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "vagrant"
+    puppet.manifest_file  = "init.pp"
+    # puppet.module_path    = ["modules", "roles"]
+    # puppet.facter         = { "role" => ENV['VM_ROLE'] }
+    options = ["--verbose", "--show_diff", "--detailed-exitcodes"]
+    options << "--noop"  if ENV['NOOP']
+    options << "--debug" if ENV['DEBUG']
+    puppet.options = options
   end
 
   # DNSの名前解決tips
