@@ -19,3 +19,13 @@ package {
 ]:
 ensure => installed,
 }
+
+# rbenv をクローンする
+exec { 'clone rbenv':
+	user     => "vagrant",
+	cwd      => "/home/vagrant",
+	path     => ['/usr/bin'],
+	command  => "git clone https://github.com/sstephenson/rbenv.git .rbenv",
+	creates => "/home/vagrant/.rbenv",
+	require  => Package['git'],
+}
