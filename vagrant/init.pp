@@ -1,5 +1,6 @@
 Package { allow_virtual => true }
 
+# package をインストールする
 package {
 [
 'patch',
