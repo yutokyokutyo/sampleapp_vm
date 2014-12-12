@@ -30,3 +30,7 @@ exec { 'clone rbenv':
 	creates => "/home/vagrant/.rbenv",
 	require  => Package['git'],
 }
+
+file { '/home/vagrant/.bash_profile':
+    source => '/vagrant/template_bash_profile',
+}
