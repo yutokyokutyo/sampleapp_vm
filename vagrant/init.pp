@@ -1,3 +1,5 @@
+Package { allow_virtual => true }
+
 package {
 [
 'patch',
