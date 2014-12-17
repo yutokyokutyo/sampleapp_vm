@@ -73,3 +73,12 @@ exec { 'install bundler':
 	creates => "/home/vagrant/.rbenv/shims/bundle",
 	require => Exec['install ruby'],
 }
+
+# Sample_app をクローンする
+exec { 'clone Sample_app':
+	user     => "vagrant",
+	cwd      => "/home/vagrant",
+	command  => "git clone https://github.com/yutokyokutyo/Sample_app_on_VM.git",
+	creates  => "/home/vagrant/Sample_app_on_VM",
+	require  => Package['git'],
+}
