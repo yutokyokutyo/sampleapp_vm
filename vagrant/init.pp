@@ -1,4 +1,5 @@
 Package { allow_virtual => true }
+Exec { path => ['/usr/bin:/bin'] }
 
 # package をインストールする
 package {
