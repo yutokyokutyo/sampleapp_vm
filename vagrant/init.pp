@@ -33,6 +33,9 @@ exec { 'clone rbenv':
 }
 
 file { '/home/vagrant/.bash_profile':
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => '644',
     source => '/vagrant/template_bash_profile',
 }
 
