@@ -93,3 +93,11 @@ exec { 'install gem':
 	require     => Exec['install bundler'],
 	timeout     => 1000,
 }
+
+# iptables の設定
+file { '/etc/sysconfig/iptables':
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
+    source => '/vagrant/template_iptables',
+}
