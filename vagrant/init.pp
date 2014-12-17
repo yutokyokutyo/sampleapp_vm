@@ -63,3 +63,13 @@ file { '/home/vagrant/.gemrc':
     mode   => '0644',
     source => '/vagrant/.gemrc_setting',
 }
+
+# bundler をインストールする
+exec { 'install bundler':
+	user    => "vagrant",
+	cwd     => "/home/vagrant/.rbenv",
+	environment => ['HOME=/home/vagrant'],
+	command => "/bin/bash -c 'source /home/vagrant/.bash_profile ; gem install bundler'",
+	creates => "/home/vagrant/.rbenv/shims/bundle",
+	require => Exec['install ruby'],
+}
