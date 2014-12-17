@@ -82,3 +82,14 @@ exec { 'clone Sample_app':
 	creates  => "/home/vagrant/Sample_app_on_VM",
 	require  => Package['git'],
 }
+
+# 必要な Gem を bundle install する
+exec { 'install gem':
+	user        => "vagrant",
+	cwd         => "/home/vagrant/Sample_app_on_VM",
+	environment => ['HOME=/home/vagrant'],
+	command     => "bash -c 'source /home/vagrant/.bash_profile ; bundle install --without production --path vendor/bundle'",
+	creates     => "/home/vagrant/Sample_app_on_VM/vendor/bundle",
+	require     => Exec['install bundler'],
+	timeout     => 1000,
+}
