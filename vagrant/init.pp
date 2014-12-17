@@ -40,7 +40,6 @@ file { '/home/vagrant/.bash_profile':
 exec { 'clone ruby-build':
 	user     => "vagrant",
 	cwd      => "/home/vagrant/.rbenv",
-	path     => ['/usr/bin'],
 	command  => "git clone https://github.com/sstephenson/ruby-build.git /home/vagrant/.rbenv/plugins/ruby-build",
 	creates => "/home/vagrant/.rbenv/plugins/ruby-build",
 	require  => Package['git'],
@@ -51,7 +50,6 @@ exec { 'install ruby':
 	user        => "vagrant",
 	cwd         => "/home/vagrant/.rbenv",
 	environment => ['HOME=/home/vagrant'],
-	path        => "/bin:/usr/bin:/usr/local/rbenv/bin:/usr/local/rbenv/plugins/ruby-build/bin/",
 	command     => "bash -c 'source /home/vagrant/.bash_profile ; rbenv install 2.1.5 ; rbenv global 2.1.5'",
 	creates     => "/home/vagrant/.rbenv/versions/2.1.5",
 	require     => Exec['clone ruby-build'],
