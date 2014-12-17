@@ -59,7 +59,7 @@ exec { 'install ruby':
 file { '/home/vagrant/.gemrc':
     owner  => 'vagrant',
     group  => 'vagrant',
-    mode   => '0644',
+    mode   => '644',
     source => '/vagrant/.gemrc_setting',
 }
 
@@ -97,7 +97,7 @@ exec { 'install gem':
 file { '/etc/sysconfig/iptables':
     owner  => 'root',
     group  => 'root',
-    mode   => '0600',
+    mode   => '600',
     source => '/vagrant/template_iptables',
 }
 
