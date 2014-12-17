@@ -57,7 +57,6 @@ exec { 'install ruby':
 
 # .gemrcの作成とrdoc,riをいれない設定
 file { '/home/vagrant/.gemrc':
-    # ensure => ,
     owner  => 'vagrant',
     group  => 'vagrant',
     mode   => '0644',
