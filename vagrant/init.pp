@@ -54,3 +54,12 @@ exec { 'install ruby':
 	creates     => "/home/vagrant/.rbenv/versions/2.1.5",
 	require     => Exec['clone ruby-build'],
 }
+
+# .gemrcの作成とrdoc,riをいれない設定
+file { '/home/vagrant/.gemrc':
+    # ensure => ,
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => '0644',
+    source => '/vagrant/.gemrc_setting',
+}
