@@ -112,3 +112,4 @@ exec { 'restart iptables':
   command => 'sudo /sbin/service iptables restart',
   require => File['/etc/sysconfig/iptables'],
 }
+  timeout     => 1000,
