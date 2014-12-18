@@ -55,7 +55,7 @@ exec { 'install ruby':
   command     => 'bash -c "source /home/vagrant/.bash_profile ; rbenv install 2.1.5 ; rbenv global 2.1.5"',
   creates     => '/home/vagrant/.rbenv/versions/2.1.5',
   require     => [
-	Exec['clone ruby-build'],
+    Exec['clone ruby-build'],
     Exec['clone rbenv'],
   ]
 }
