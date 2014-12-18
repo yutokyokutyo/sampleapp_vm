@@ -41,7 +41,6 @@ file { '/home/vagrant/.bash_profile':
 # ruby-build をクローンする
 exec { 'clone ruby-build':
   user    => 'vagrant',
-  cwd     => '/home/vagrant/.rbenv',
   command => 'git clone https://github.com/sstephenson/ruby-build.git /home/vagrant/.rbenv/plugins/ruby-build',
   creates => '/home/vagrant/.rbenv/plugins/ruby-build',
   require => Package['git'],
