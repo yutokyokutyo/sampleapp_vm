@@ -6,11 +6,6 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hfm4/centos6"
 
-  # config.vm.provision :shell do |shell|
-  #   shell.path = "vagrant/provision.sh"
-  #   shell.privileged = false
-  # end
-
 config.vm.provision :shell do |update_puppet|
     update_puppet.inline = <<-'SCRIPT'
       require_version='3.7.3'
@@ -26,8 +21,6 @@ config.vm.provision :shell do |update_puppet|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "vagrant"
     puppet.manifest_file  = "init.pp"
-    # puppet.module_path    = ["modules", "roles"]
-    # puppet.facter         = { "role" => ENV['VM_ROLE'] }
     options = ["--verbose", "--show_diff", "--detailed-exitcodes"]
     options << "--noop"  if ENV['NOOP']
     options << "--debug" if ENV['DEBUG']
