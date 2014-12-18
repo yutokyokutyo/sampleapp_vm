@@ -25,9 +25,8 @@ package {
 # rbenv をクローンする
 exec { 'clone rbenv':
   user    => 'vagrant',
-  cwd     => '/home/vagrant',
   path    => ['/usr/bin'],
-  command => 'git clone https://github.com/sstephenson/rbenv.git .rbenv',
+  command => 'git clone https://github.com/sstephenson/rbenv.git /home/vagrant/.rbenv',
   creates => '/home/vagrant/.rbenv',
   require => Package['git'],
 }
