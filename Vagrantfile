@@ -6,9 +6,25 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hfm4/centos6"
 
-  config.vm.provision :shell do |shell|
-    shell.path = "vagrant/provision.sh"
-    shell.privileged = false
+config.vm.provision :shell do |update_puppet|
+    update_puppet.inline = <<-'SCRIPT'
+      require_version='3.7.3'
+      puppet_version=$(rpm -q --queryformat '%{VERSION}' puppet)
+      [ "$puppet_version" = "$require_version" ] || {
+          rpm --import http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs
+          yum install -y http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+          yum install -y "puppet-${require_version}"
+      }
+    SCRIPT
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "vagrant"
+    puppet.manifest_file  = "init.pp"
+    options = ["--verbose", "--show_diff", "--detailed-exitcodes"]
+    options << "--noop"  if ENV['NOOP']
+    options << "--debug" if ENV['DEBUG']
+    puppet.options = options
   end
 
   # DNSの名前解決tips
