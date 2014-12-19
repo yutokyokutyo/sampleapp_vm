@@ -101,12 +101,12 @@ file { '/etc/sysconfig/iptables':
   group  => 'root',
   mode   => '600',
   source => '/vagrant/template_iptables',
+  notify => Service['iptables'],
 }
 
 # iptables を起動する
-exec { 'restart iptables':
-  user    => 'root',
-  cwd     => '/etc/sysconfig',
-  command => 'sudo /sbin/service iptables restart',
-  require => File['/etc/sysconfig/iptables'],
+service { 'iptables':
+enable     => true,
+ensure     => running,
+hasrestart => true,
 }
