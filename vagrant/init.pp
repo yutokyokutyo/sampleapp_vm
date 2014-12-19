@@ -49,7 +49,6 @@ exec { 'clone ruby-build':
 # Ruby をインストールする
 exec { 'install ruby':
   user        => 'vagrant',
-  cwd         => '/home/vagrant/.rbenv',
   environment => ['HOME=/home/vagrant'],
   command     => 'bash -c "source /home/vagrant/.bash_profile ; rbenv install 2.1.5 ; rbenv global 2.1.5"',
   creates     => '/home/vagrant/.rbenv/versions/2.1.5',
@@ -71,7 +70,6 @@ file { '/home/vagrant/.gemrc':
 # bundler をインストールする
 exec { 'install bundler':
   user    => 'vagrant',
-  cwd     => '/home/vagrant/.rbenv',
   environment => ['HOME=/home/vagrant'],
   command => '/bin/bash -c "source /home/vagrant/.bash_profile ; gem install bundler"',
   creates => '/home/vagrant/.rbenv/shims/bundle',
