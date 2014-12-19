@@ -53,6 +53,7 @@ exec { 'install ruby':
   environment => ['HOME=/home/vagrant'],
   command     => 'bash -c "source /home/vagrant/.bash_profile ; rbenv install 2.1.5 ; rbenv global 2.1.5"',
   creates     => '/home/vagrant/.rbenv/versions/2.1.5',
+  timeout     => 1000,
   require     => [
     Exec['clone ruby-build'],
     Exec['clone rbenv'],
@@ -112,4 +113,3 @@ exec { 'restart iptables':
   command => 'sudo /sbin/service iptables restart',
   require => File['/etc/sysconfig/iptables'],
 }
-  timeout     => 1000,
