@@ -106,7 +106,7 @@ file { '/etc/sysconfig/iptables':
 
 # iptables を起動する
 service { 'iptables':
-enable     => true,
-ensure     => running,
-hasrestart => true,
+  enable     => true,
+  ensure     => running,
+  hasrestart => true,
 }
