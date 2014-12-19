@@ -1,5 +1,5 @@
 Package { allow_virtual => true }
-Exec { path => ['/usr/bin:/bin'] }
+Exec { path => ['/home/vagrant/.rbenv/shims:/home/vagrant/.rbenv/bin:/bin:/usr/bin:/sbin:/usr/sbin:/home/vagrant/bin'] }
 
 # package をインストールする
 package {
@@ -25,7 +25,6 @@ package {
 # rbenv をクローンする
 exec { 'clone rbenv':
   user    => 'vagrant',
-  path    => ['/usr/bin'],
   command => 'git clone https://github.com/sstephenson/rbenv.git /home/vagrant/.rbenv',
   creates => '/home/vagrant/.rbenv',
   require => Package['git'],
@@ -50,7 +49,7 @@ exec { 'clone ruby-build':
 exec { 'install ruby':
   user        => 'vagrant',
   environment => ['HOME=/home/vagrant'],
-  command     => 'bash -c "source /home/vagrant/.bash_profile ; rbenv install 2.1.5 ; rbenv global 2.1.5"',
+  command     => 'rbenv install 2.1.5 ; rbenv global 2.1.5',
   creates     => '/home/vagrant/.rbenv/versions/2.1.5',
   timeout     => 1000,
   require     => [
@@ -69,11 +68,11 @@ file { '/home/vagrant/.gemrc':
 
 # bundler をインストールする
 exec { 'install bundler':
-  user    => 'vagrant',
+  user        => 'vagrant',
   environment => ['HOME=/home/vagrant'],
-  command => '/bin/bash -c "source /home/vagrant/.bash_profile ; gem install bundler"',
-  creates => '/home/vagrant/.rbenv/shims/bundle',
-  require => Exec['install ruby'],
+  command     => 'gem install bundler',
+  creates     => '/home/vagrant/.rbenv/shims/bundle',
+  require     => Exec['install ruby'],
 }
 
 # Sample_app をクローンする
@@ -90,7 +89,7 @@ exec { 'install gem':
   user        => 'vagrant',
   cwd         => '/home/vagrant/Sample_app_on_VM',
   environment => ['HOME=/home/vagrant'],
-  command     => 'bash -c "source /home/vagrant/.bash_profile ; bundle install --without production --path vendor/bundle"',
+  command     => 'bundle install --without production --path vendor/bundle',
   creates     => '/home/vagrant/Sample_app_on_VM/vendor/bundle',
   require     => Exec['install bundler'],
   timeout     => 1000,
